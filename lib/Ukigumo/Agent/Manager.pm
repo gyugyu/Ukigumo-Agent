@@ -44,6 +44,13 @@ has 'timeout' => (
     default => sub { shift->config->{timeout} // 0 },
 );
 
+has 'github_api_token' => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub { shift->config->{github_api_token} // '' },
+);
+
 has 'ignore_github_tags' => (
     is      => 'ro',
     isa     => 'Bool',

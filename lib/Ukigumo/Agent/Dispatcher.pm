@@ -65,6 +65,10 @@ post '/api/github_hook' => sub {
                 # To: git@github.com:tokuhirom/plenv.git
                 $repo_url =~ s!\Ahttps?://([^/]+)/!git\@$1:!;
             }
+            elsif (!$c->manager->github_api_token eq '') {
+                my $x_oauth_basic = $c->manager->github_api_token . ':x-oauth-basic@';
+                $repo_url =~ s!\A(https?://)(.+)!$1$x_oauth_basic$2!;
+            }
 
             my $tag;
             my $branch;
